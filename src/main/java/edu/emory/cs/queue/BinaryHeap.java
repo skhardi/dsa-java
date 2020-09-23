@@ -45,7 +45,7 @@ public class BinaryHeap<K extends Comparable<K>> extends AbstractPQ<K> {
     }
 
     private void swim(int index) {
-        for (; index > 1 && compare(index, index/2) > 0; index /=2) {
+        for (; index > 2 && compare(index, index/2) > 0; index /=2) {
                 swap(index,index/2);
         }
     }
