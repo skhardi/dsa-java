@@ -7,7 +7,6 @@ import java.util.NoSuchElementException;
 
 public class TernaryHeapQuiz<K extends Comparable<K>> extends AbstractPQ<K> {
     protected final List<K> keys;
-    private int size;
 
     TernaryHeapQuiz() {
         super(Comparator.naturalOrder());
@@ -23,13 +22,13 @@ public class TernaryHeapQuiz<K extends Comparable<K>> extends AbstractPQ<K> {
 
     @Override
     public int size() {
-        return size;
+        return keys.size() - 1;
     }
 
     @Override
     public void add(K key) {
         keys.add(key);
-        swim(++size);
+        swim(size());
     }
 
     @Override
@@ -37,26 +36,44 @@ public class TernaryHeapQuiz<K extends Comparable<K>> extends AbstractPQ<K> {
         if (isEmpty())
             throw new NoSuchElementException("Empty List");
 
-        swap(1, size);
-        K removed = keys.remove(size--);
+        swap(1, size());
+        K removed = keys.remove(size());
         sink();
 
         return removed;
     }
 
     private void swim(int index) {
-        for (; index > 2 && compare(index, index/3) > 0; index /=3) {
-            swap(index,index/3);
+        for (; index > 3 && compare(getParent(index), index) < 0; index = getParent(index)) {
+            swap(index,getParent(index));
         }
-//        if(compare(index, index-1) > 0) swap(index, index-1);
+        if(index < 4) {
+            if(compare(index, 1) > 0) swap(index, 1);
+        }
+    }
+
+    private int getParent(int index){
+        if (index%3 == 2) {
+            return (index+1) / 3; // this is because the right child will
+        }							//result in a one-off error due to being divisible by 3
+        if(index%3 == 1)
+            return (index-1)/3 ;
+        return index/3; //same as floor (index/3)
     }
 
     private void sink() {
-        for (int k = 1, i = 2; i <= size; k = i, i *= 3) {
-            if (i < size && compare(i, i + 1) < 0) i++;
-            if (i < size && compare(i, i + 1) < 0) i++;
-            if (compare(k, i) >= 0) break;
-            swap(k, i);
+        int maxchild;
+        for (int k = 1, i = 3; i <= size(); k = maxchild, i = (maxchild* 3)) {
+            maxchild = i-1;
+            if (i <= size() && compare(i, i-1) > 0) {
+                maxchild = i;
+            }
+            if (i < (size()-1) && compare(i+1, maxchild) > 0){
+                    maxchild = i+1;
+            }
+            if (compare(k, maxchild) >= 0) {break;}
+          swap(k, maxchild);
+
         }
     }
 
