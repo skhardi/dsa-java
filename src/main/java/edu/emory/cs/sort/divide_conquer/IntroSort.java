@@ -22,6 +22,7 @@ public class IntroSort<K extends Comparable<K>> extends QuickSort<K> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void sort(K[] array, int beginIndx, int endIndx) {
         final int maxDepth = getMaxDepth(beginIndx, endIndx);
         sort(array, beginIndx, endIndx, maxDepth);
