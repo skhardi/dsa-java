@@ -28,13 +28,13 @@ public class SortQuizTest extends SortTest {
     }
 
     public void testRuntime() {
-        System.out.println("Knuth vs. Hibbard Shell Sort (Runtimes, Comparisons, Assignments)");
-        System.out.println("Input Ascending Sort");
-        testRuntime(InputNature.ASCENDING, new ShellSortKnuth<>(), new ShellSortQuiz<>());
-        System.out.println("Input Random Sort");
-        testRuntime(InputNature.RANDOM, new ShellSortKnuth<>(), new ShellSortQuiz<>());
-        System.out.println("Input Descending Sort");
-        testRuntime(InputNature.DESCENDING, new ShellSortKnuth<>(), new ShellSortQuiz<>());
+//        System.out.println("Knuth vs. Hibbard Shell Sort (Runtimes, Comparisons, Assignments)");
+//        System.out.println("Input Ascending Sort");
+//        testRuntime(InputNature.ASCENDING, new ShellSortKnuth<>(), new ShellSortQuiz<>());
+//        System.out.println("Input Random Sort");
+//        testRuntime(InputNature.RANDOM, new ShellSortKnuth<>(), new ShellSortQuiz<>());
+//        System.out.println("Input Descending Sort");
+//        testRuntime(InputNature.DESCENDING, new ShellSortKnuth<>(), new ShellSortQuiz<>());
 
         System.out.println("LSD vs. MSD Radix Sort (Runtimes)");
         testRuntime(InputNature.RANDOM, new LSDRadixSort(), new RadixSortQuiz());
