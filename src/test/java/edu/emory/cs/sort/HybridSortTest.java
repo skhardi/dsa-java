@@ -43,10 +43,10 @@ public class HybridSortTest {
         HybridSort<Integer> gold = new HybridSortBaseline<>();
         HybridSort<Integer> mine = new HybridSortHW<>();
         double ratio;
-        int row, col;
+        int row = 100, col;
 
         for (ratio = 0; ratio <= 1.0; ratio +=0.25) { // test speed with different ratios (0, 0.25, 0,75, 1)
-            for (row = 10; row <= 100; row += 10) {
+//            for (row = 10; row <= 100; row += 10) {
                 for (col = 10; col <= 100; col += 10) {    // for (row = 100; row <= 1000; row += 100) {
                     long[] time = testSpeed(row, col, ratio, gold, mine);
                     StringJoiner join = new StringJoiner("\t");
@@ -54,7 +54,7 @@ public class HybridSortTest {
                     for (long t : time) join.add(Long.toString(t));
                     System.out.println(join.toString());
                 }
-            }
+//            }
         }
     }
 
