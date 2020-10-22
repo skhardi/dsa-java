@@ -16,9 +16,8 @@
 package edu.emory.cs.tree;
 
 import edu.emory.cs.tree.balanced.AVLTree;
-import edu.emory.cs.tree.balanced.BalancedBinarySearchTree;
+import edu.emory.cs.tree.balanced.BalancedBinarySearchTreeQuiz;
 import edu.emory.cs.tree.balanced.RedBlackTree;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -135,7 +134,7 @@ public class TreeTest {
         testRobustness(new BinarySearchTree<>());
         testRobustness(new AVLTree<>());
         testRobustness(new RedBlackTree<>());
-        testRobustness(new BalancedBinarySearchTree<>());
+        testRobustness(new BalancedBinarySearchTreeQuiz<>());
     }
 
     private void testRobustness(AbstractBinarySearchTree<Integer, ?> tree) {

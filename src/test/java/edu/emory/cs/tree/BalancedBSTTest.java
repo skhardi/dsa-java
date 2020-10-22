@@ -1,12 +1,12 @@
 package edu.emory.cs.tree;
 
-import edu.emory.cs.tree.balanced.BalancedBinarySearchTree;
+import edu.emory.cs.tree.balanced.BalancedBinarySearchTreeQuiz;
 import org.junit.Test;
 
 public class BalancedBSTTest  {
     @Test
     public void testBalancedBST() {
-        BalancedBinarySearchTree<Integer> bbst = new BalancedBinarySearchTree<>();
+        BalancedBinarySearchTreeQuiz<Integer> bbst = new BalancedBinarySearchTreeQuiz<>();
 
         // Tree 1
         bbst.add(3);
@@ -18,7 +18,7 @@ public class BalancedBSTTest  {
         System.out.println(bbst.toString() + "\n");
 
         // Tree 2
-        bbst = new BalancedBinarySearchTree<>();
+        bbst = new BalancedBinarySearchTreeQuiz<>();
         bbst.add(3);
         bbst.add(1);
         bbst.add(2);
@@ -28,7 +28,7 @@ public class BalancedBSTTest  {
         System.out.println(bbst.toString() + "\n");
 
         // Tree 3
-        bbst = new BalancedBinarySearchTree<>();
+        bbst = new BalancedBinarySearchTreeQuiz<>();
         bbst.add(3);
         bbst.add(1);
         bbst.add(2);
@@ -38,7 +38,7 @@ public class BalancedBSTTest  {
         System.out.println(bbst.toString() + "\n");
 
         // Tree 4
-        bbst = new BalancedBinarySearchTree<>();
+        bbst = new BalancedBinarySearchTreeQuiz<>();
         bbst.add(3);
         bbst.add(2);
         bbst.add(1);
