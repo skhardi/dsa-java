@@ -7,13 +7,13 @@ public class Trie<K> {
      no-arg constructor creates new trie node w/
      null parent and dummy key
      */
-    protected Trie() {
+    public Trie() {
         root = new TrieNode<>(null, (char)0);
     }
 
     protected TrieNode<K> getRoot() { return root; }
 
-    protected TrieNode<K> find(String key) {
+    public TrieNode<K> find(String key) {
         TrieNode<K> current = root;
         if (current != null) {
             for (int i = 0; i < key.length(); i++) {
@@ -25,7 +25,7 @@ public class Trie<K> {
         return current;
     }
 
-    protected K get(String key) {
+    public K get(String key) {
         TrieNode<K> node = find(key);
 
         if (node != null && node.isEndState())
