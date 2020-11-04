@@ -33,6 +33,40 @@ public class AutocompleteHW extends Autocomplete<List<String>> {
 
     }
 
+    @Override
+    public void pickCandidate(String prefix, String candidate) {
+        int max = getMax();
+
+        prefix = checkPrefix(prefix);
+
+        if (!contains(candidate))
+            put(candidate, null);
+
+        List<String> listOfCandidates = get(prefix);
+
+        if (listOfCandidates == null)
+            listOfCandidates = new ArrayList<>();
+
+        if (listOfCandidates.contains(candidate))
+            listOfCandidates.remove(candidate);
+        else if (listOfCandidates.size() == max)
+            listOfCandidates.remove(listOfCandidates.size() - 1);
+
+
+        listOfCandidates.add(0, candidate);
+        find(prefix).setValue(listOfCandidates);
+    }
+
+    private String checkPrefix(String prefix) {
+        prefix = prefix.strip();
+        if (find(prefix) == null) {
+            put(prefix, null);
+            find(prefix).setEndState(false);
+        }
+
+        return prefix;
+    }
+
     private List<String> breadthFirstSearch(TrieNode<List<String>> preNode, String current, List<String> candidates) {
         Deque<TrieNode<List<String>>> nodes = new ArrayDeque<>();
         Map<Character, TrieNode<List<String>>> children;
@@ -74,37 +108,4 @@ public class AutocompleteHW extends Autocomplete<List<String>> {
         return candidates;
     }
 
-    @Override
-    public void pickCandidate(String prefix, String candidate) {
-        int max = getMax();
-
-        prefix = checkPrefix(prefix);
-
-        if (!contains(candidate))
-            put(candidate, null);
-
-        List<String> candidates = get(prefix);
-
-        if (candidates == null)
-            candidates = new ArrayList<>();
-
-        if (candidates.contains(candidate))
-            candidates.remove(candidate);
-        else if (candidates.size() == max)
-            candidates.remove(candidates.size() - 1);
-
-
-        candidates.add(0, candidate);
-        find(prefix).setValue(candidates);
-    }
-
-    private String checkPrefix(String prefix) {
-        prefix = prefix.strip();
-        if (find(prefix) == null) {
-            put(prefix, null);
-            find(prefix).setEndState(false);
-        }
-
-        return prefix;
-    }
 }

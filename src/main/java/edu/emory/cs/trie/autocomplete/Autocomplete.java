@@ -60,7 +60,7 @@ public abstract class Autocomplete<T> extends Trie<T> {
      * @param prefix the prefix of candidate words to return.
      * @return the list of candidate words for the specific prefix.
      */
-    public abstract List<String> getCandidates(String prefix);
+    public abstract T getCandidates(String prefix);
 
     /**
      * Memorize the specific candidate word for the specific prefix.

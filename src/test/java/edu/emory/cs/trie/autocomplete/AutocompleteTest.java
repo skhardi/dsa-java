@@ -54,7 +54,7 @@ public class AutocompleteTest {
         String log = String.format("%2d: ", eval.total);
         eval.total++;
         try {
-            List<String> candidates = ac.getCandidates(prefix);
+            List<String> candidates = (List<String>) ac.getCandidates(prefix);
             if (expected.equals(candidates)) {
                 eval.correct++;
                 log += "PASS";

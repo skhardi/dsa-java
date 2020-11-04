@@ -5,11 +5,11 @@ import org.junit.Test;
 import java.util.List;
 
 public class AutocompleteHWTest {
+    final String dict_file = "src/main/resources/dict.txt";
+    final String myDict_file = "src/main/resources/myDict.txt";
 
     @Test
     public void testHW() {
-        final String dict_file = "src/main/resources/dict.txt";
-        final String myDict_file = "src/main/resources/myDict.txt";
         final int max = 20;
         Autocomplete<List<String>> ac = new AutocompleteHW(dict_file, max);
 
@@ -41,6 +41,28 @@ public class AutocompleteHWTest {
         ac2.pickCandidate(prefix, "67");
         System.out.println(ac2.getCandidates(prefix));
 
+    }
+
+    @Test
+    public void testHWExtra() {
+        final int max = 20;
+        Autocomplete<List<Candidate>> ac = new AutocompleteHWExtra(dict_file, max);
+
+        String prefix = "abas";
+        List<Candidate> c = ac.getCandidates(prefix);
+        System.out.println("c");
+        while(!c.isEmpty())
+            System.out.print(c.remove(0).word + " ");
+        ac.pickCandidate(prefix, "dog");
+        ac.pickCandidate(prefix, "dog");
+        ac.pickCandidate(prefix, "dotted");
+        ac.pickCandidate(prefix, "dog");
+        ac.pickCandidate(prefix, "dotted");
+        ac.pickCandidate(prefix, "dotted");
+        c = ac.getCandidates(prefix);
+        System.out.println("c");
+        while(!c.isEmpty())
+            System.out.print(c.remove(0).word + " ");
     }
 
 }
