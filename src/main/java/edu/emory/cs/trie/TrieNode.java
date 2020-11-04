@@ -10,7 +10,7 @@ public class TrieNode<K> {
     private char key;
     private K value;
 
-    protected TrieNode(TrieNode<K> parent, char key) {
+    public TrieNode(TrieNode<K> parent, char key) {
         children = new HashMap<>();
         setEndState(false);
         setParent(parent);
@@ -20,25 +20,25 @@ public class TrieNode<K> {
 
     // getter methods:
 
-    protected TrieNode<K> getParent() { return parent; }
+    public TrieNode<K> getParent() { return parent; }
 
-    protected char getKey() { return key; }
+    public char getKey() { return key; }
 
-    protected K getValue() { return value; }
+    public K getValue() { return value; }
 
-    protected TrieNode<K> getChild(char key) { return children.get(key); }
+    public TrieNode<K> getChild(char key) { return children.get(key); }
 
-    protected Map<Character, TrieNode<K>> getChildrenMap() { return children; }
+    public Map<Character, TrieNode<K>> getChildrenMap() { return children; }
 
     // setter methods:
 
-    protected void setParent(TrieNode<K> parent) { this.parent = parent; }
+    public void setParent(TrieNode<K> parent) { this.parent = parent; }
 
-    protected void setEndState(boolean endState) { this.endState = endState; }
+    public void setEndState(boolean endState) { this.endState = endState; }
 
-    protected void setKey(char key) { this.key = key; }
+    public void setKey(char key) { this.key = key; }
 
-    protected K setValue(K value) {
+    public K setValue(K value) {
         K tmp = this.value;
         this.value = value;
         return tmp;
@@ -64,9 +64,9 @@ public class TrieNode<K> {
 
     // boolean statements:
 
-    protected boolean isEndState() { return endState; }
+    public boolean isEndState() { return endState; }
 
-    protected boolean hasValue() { return value != null; }
+    public boolean hasValue() { return value != null; }
 
-    protected boolean hasChildren() { return !children.isEmpty(); }
+    public boolean hasChildren() { return !children.isEmpty(); }
 }
