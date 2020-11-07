@@ -48,7 +48,7 @@ public class GraphTest {
 
     @Test
     public void testTopologicalSort() {
-        Graph graph = new Graph(8);
+        GraphQuiz graph = new GraphQuiz(8);
 
         graph.setDirectedEdge(0, 3, 1);
         graph.setDirectedEdge(0, 4, 1);
@@ -62,5 +62,6 @@ public class GraphTest {
 
         assertEquals("[0, 1, 2, 3, 4, 5, 7, 6]", new Graph(graph).topological_sort(false).toString());
         assertEquals("[0, 1, 3, 5, 2, 4, 6, 7]", new Graph(graph).topological_sort(true).toString());
+        System.out.println(graph.numberOfCycles());
     }
 }

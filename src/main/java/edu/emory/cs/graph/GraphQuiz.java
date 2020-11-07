@@ -1,56 +1,50 @@
 package edu.emory.cs.graph;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.awt.*;
+import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.Set;
-import java.util.HashSet;
 
 public class GraphQuiz extends Graph {
+    private int count = 0;
+
     public GraphQuiz(int size) { super(size); }
     public GraphQuiz(Graph g) { super(g); }
 
     public int numberOfCycles() {
-        int count = 0;
-        /*
-        start at target
-        while has out going edge
-            follow edge
-            mark visited
-            if already visited
-                break
-         */
-//
-//        if (!this.containsCycle()) return 0;
-//
-//        Set<Integer> visited = new HashSet<>();
-//        for (int i = 0; i < size(); i ++) {
-//            dfSearch();
-//        }
-        Deque<Integer> notVisited = IntStream.range(0, size()).boxed().collect(Collectors.toCollection(ArrayDeque::new));
 
-        while (!notVisited.isEmpty()) {
-            count += containsCycleAux(notVisited.poll(), notVisited, new HashSet<>(), count);
-        }
+        if (!containsCycle()) return 0;
 
+        boolean[] visited = new boolean[size()];
+        boolean[] partVisited = new boolean[size()];
+
+        List<Deque<Edge>> oge = getOutgoingEdges();
+
+        for(int i = 0; i < oge.size(); i++)
+            for (Edge e : oge.remove(i))
+                numberOfCyclesAux(e, visited, partVisited);
 
         return count;
     }
 
-    private int containsCycleAux(int target, Deque<Integer> notVisited, Set<Integer> visited, int count) {
-        notVisited.remove(target);
-        visited.add(target);
-
-        for (Edge edge : getIncomingEdges(target)) {
-            if (visited.contains(edge.getSource()))
-                return ++count;
-
-            if (containsCycleAux(edge.getSource(), notVisited, new HashSet<>(visited), ++count) > count)
-                return count;
+    private void numberOfCyclesAux(Edge edge, boolean visited[], boolean partVisited[]) {
+        if (visited[edge.getSource()]) {
+            count++;
+            return;
+        }
+        visited[edge.getSource()] = true;
+        if (partVisited[edge.getSource()]) {
+            return;
         }
 
-        return count;
-    }
+        for (Edge e : getIncomingEdges(edge.getSource())) {
+            numberOfCyclesAux(e, visited, partVisited);
+        }
 
+        partVisited[edge.getTarget()] = true;
+        visited[edge.getTarget()] = false;
+    }
 }
+
+
