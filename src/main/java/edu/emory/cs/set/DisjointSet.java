@@ -38,4 +38,11 @@ public class DisjointSet {
             return r2;
         }
     }
+
+    public void printSubsets() {
+        for (int i : subsets)
+            System.out.print(i + " ");
+
+        System.out.println();
+    }
 }
