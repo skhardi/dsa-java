@@ -3,6 +3,7 @@
     <extensionMap>
       <mapping pattern="OldTownRoad" type="PLAIN_TEXT" />
       <mapping pattern="graphquiznotes" type="PLAIN_TEXT" />
+      <mapping pattern="ILikeIt" type="PLAIN_TEXT" />
       <mapping pattern="euphemistic" type="PLAIN_TEXT" />
       <mapping pattern="actor" type="PLAIN_TEXT" />
       <mapping pattern="vulgar" type="PLAIN_TEXT" />
