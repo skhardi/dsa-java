@@ -103,4 +103,16 @@ public class TrieQuizTest {
         Set<String> actual = trie.getEntities(input).stream().map(Entity::toString).collect(Collectors.toSet());
         assertEquals(expected, actual);
     }
+    @Test
+    public void test7() {
+        final List<String> L = List.of( "United Kingdom", "Kingdom of Serbia");
+        TrieQuiz trie = new TrieQuiz();
+        for (int i = 0; i < L.size(); i++)
+            trie.put(L.get(i), i);
+        String input = "Is it called United Kingdom of Serbia or Kingdom of Serbia?";
+        List<Entity> entities = List.of(new Entity(13, 27, 0), new Entity(20, 37, 1), new Entity(41,58,1));
+        Set<String> expected = entities.stream().map(Entity::toString).collect(Collectors.toSet());
+        Set<String> actual = trie.getEntities(input).stream().map(Entity::toString).collect(Collectors.toSet());
+        assertEquals(expected, actual);
+    }
 }

@@ -28,14 +28,14 @@ public class TrieQuiz extends Trie<Integer> {
 
                 if (find(s) != null) {
 
-                    beginIndex = input.indexOf(s);
+//                    beginIndex = input.indexOf(s);
 
                     if (contains(s)) {
 
                         Integer countryID = get(s);
-                        endIndex = beginIndex + s.length();
-                        entities.add(new Entity(beginIndex, endIndex, countryID));
-
+//                        endIndex = beginIndex + s.length();
+//                        entities.add(new Entity(beginIndex, endIndex, countryID));
+                        entities.add(new Entity(i, j+1, countryID));
                     }
 
                 }

@@ -33,6 +33,7 @@ public class GraphQuiz extends Graph {
             count++;
             return;
         }
+
         visited[edge.getSource()] = true;
         if (partVisited[edge.getSource()]) {
             return;
