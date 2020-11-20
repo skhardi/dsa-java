@@ -36,8 +36,7 @@ public class AutocompleteHW extends Autocomplete<List<String>> {
     @Override
     public void pickCandidate(String prefix, String candidate) {
         // UPDATED HERE
-        if (prefix == null || candidate == null)
-            return;
+        if (prefix == null || candidate == null) return;
 
         int max = getMax();
 
