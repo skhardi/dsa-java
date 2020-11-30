@@ -2,26 +2,19 @@ package edu.emory.cs.graph.span;
 
 import edu.emory.cs.graph.Edge;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.HashMap;
+import java.util.*;
 
 public class SpanningTree implements Comparable<SpanningTree> {
     private final List<Edge> edges;
     private double total_weight;
 
-
     public SpanningTree() {
         edges = new ArrayList<>();
-        total_weight = 0;
     }
 
     public SpanningTree(SpanningTree tree) {
-        this.edges = tree.edges;
-        this.total_weight += tree.total_weight;
+        edges = new ArrayList<>(tree.getEdges());
+        total_weight = tree.getTotalWeight();
     }
 
     public List<Edge> getEdges() {
@@ -43,13 +36,47 @@ public class SpanningTree implements Comparable<SpanningTree> {
 
     @Override
     public int compareTo(SpanningTree tree) {
-        double cmp = total_weight - tree.total_weight;
-
-        if (cmp > 0) return 1;
-        else if (cmp < 0) return -1;
+        double diff = total_weight - tree.total_weight;
+        if (diff > 0) return 1;
+        else if (diff < 0) return -1;
         else return 0;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder build = new StringBuilder();
+
+        for (Edge edge : edges)
+            build.append(String.format("\n%d <- %d : %f", edge.getTarget(), edge.getSource(), edge.getWeight()));
+
+        return build.length() > 0 ? build.substring(1) : "";
+    }
+
+    public String getUndirectedSequence() {
+        int i, size = size(), min, max;
+        int[] array = new int[size];
+        Edge edge;
+
+        for (i = 0; i < size; i++) {
+            edge = edges.get(i);
+
+            if (edge.getSource() < edge.getTarget()) {
+                min = edge.getSource();
+                max = edge.getTarget();
+            }
+            else {
+                min = edge.getTarget();
+                max = edge.getSource();
+            }
+
+            array[i] = min * (size + 1) + max;
+        }
+
+        Arrays.sort(array);
+        return Arrays.toString(array);
+    }
+
+    // ========================= For MSTEdmonds.java =========================
 
     public Set<Integer> getTargets() {
         Set<Integer> set = new HashSet<>();
