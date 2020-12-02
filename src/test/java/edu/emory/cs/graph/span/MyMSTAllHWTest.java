@@ -12,7 +12,7 @@ public class MyMSTAllHWTest {
         long st, et;
 
         st = System.currentTimeMillis();
-        List<SpanningTree> list = gold.getMinimumSpanningTrees(getEasyGraph());
+        List<SpanningTree> list = gold.getMinimumSpanningTrees(getInterestingGraph());
         et = System.currentTimeMillis();
         System.out.printf("%8d, %d\n", list.size(), et - st);
 
@@ -74,6 +74,22 @@ public class MyMSTAllHWTest {
         graph.setUndirectedEdge(2, 3,3);
         graph.setUndirectedEdge(2,4,3);
         graph.setUndirectedEdge(3,4,2);
+
+        return graph;
+    }
+
+    public Graph getInterestingGraph() {
+        Graph graph = new Graph(8);
+
+        graph.setUndirectedEdge(0,1,2);
+        graph.setUndirectedEdge(0,2,2);
+        graph.setUndirectedEdge(0,3,2);
+        graph.setUndirectedEdge(0,4,2);
+        graph.setUndirectedEdge(1,5,1);
+        graph.setUndirectedEdge(2,6,1);
+        graph.setUndirectedEdge(3,7,1);
+        graph.setUndirectedEdge(1,2,1);
+        graph.setUndirectedEdge(2,3,1);
 
         return graph;
     }

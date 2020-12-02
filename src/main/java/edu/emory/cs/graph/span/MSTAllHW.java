@@ -29,8 +29,13 @@ public class MSTAllHW implements MSTAll {
                 Edge e = graph.getAllEdges().get(i);
                 g.setDirectedEdge(e.getSource(),e.getTarget(),e.getWeight());
             }
-            if ((curr = getPrimMST(g)) != null)
-                allMsts.add(curr);
+            if (connected(g)) {
+                if ((curr = getKruskalMST(g)) != null)
+                    allMsts.add(curr);
+            }
+
+//            if (connected(g) && (curr = toSpanningTree(g)).size()== V)
+//                allMsts.add(curr);
 
             byte tmp = (byte)(V - 1);
             while (tmp > 0 && edgesRep[tmp] == E - V + tmp) {
@@ -45,6 +50,64 @@ public class MSTAllHW implements MSTAll {
         return filterMSTs(allMsts);
     }
 
+    public boolean connected(Graph graph) {
+        List<Edge> edges = graph.getAllEdges();
+        int V = edges.size();
+        boolean[] visited = new boolean[V + 1];
+                visited = connectedAux(graph, 0, visited);
+//        }
+
+        boolean allVisited = true;
+        for (boolean i : visited)
+            if (!i) {
+                return false;
+            }
+
+        return allVisited;
+    }
+
+    private boolean[] connectedAux(Graph g, int target, boolean[] visited) {
+        visited[target] = true;
+
+        for (Edge e : g.getIncomingEdges(target))
+            if (!visited[e.getSource()])
+                visited = connectedAux(g, e.getSource(), visited);
+
+        return visited;
+    }
+
+    private SpanningTree toSpanningTree(Graph g) {
+        SpanningTree tree = new SpanningTree();
+        boolean[][] visitedEdge = new boolean[g.size()][g.size()];
+
+        for (Edge e : g.getAllEdges()) {
+            visitedEdge[e.getSource()][e.getTarget()] = true;
+            if (!visitedEdge[e.getTarget()][e.getSource()]) {
+                tree.addEdge(e);
+            }
+        }
+
+        return tree;
+    }
+
+    public SpanningTree getKruskalMST(Graph graph) {
+        PriorityQueue<Edge> pq = new PriorityQueue<>(graph.getAllEdges());
+        DisjointSet forest = new DisjointSet(graph.size());
+        SpanningTree tree = new SpanningTree();
+        Edge edge;
+
+        while (!pq.isEmpty()) {
+            edge = pq.poll();
+
+            if (!forest.inSameSet(edge.getTarget(), edge.getSource())) {
+                tree.addEdge(edge);
+                if (tree.size() + 1 == graph.size()) break;
+                forest.union(edge.getTarget(), edge.getSource());
+            }
+        }
+
+        return tree;
+    }
     public SpanningTree getPrimMST(Graph graph) {
         PriorityQueue<Edge> queue = new PriorityQueue<>();
         SpanningTree tree = new SpanningTree();

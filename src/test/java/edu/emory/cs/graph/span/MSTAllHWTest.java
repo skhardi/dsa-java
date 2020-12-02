@@ -78,6 +78,22 @@ public class MSTAllHWTest {
 
         System.out.printf("Score: %d/%d\n", correct, total);
     }
+// my graph for extra credit
+    public Graph getInterestingGraph() {
+        Graph graph = new Graph(8);
+
+        graph.setUndirectedEdge(0,1,2);
+        graph.setUndirectedEdge(0,2,2);
+        graph.setUndirectedEdge(0,3,2);
+        graph.setUndirectedEdge(0,4,2);
+        graph.setUndirectedEdge(1,5,1);
+        graph.setUndirectedEdge(2,6,1);
+        graph.setUndirectedEdge(3,7,1);
+        graph.setUndirectedEdge(1,2,1);
+        graph.setUndirectedEdge(2,3,1);
+
+        return graph;
+    }
 
     Graph getGraph1a() {
         return new Graph(1);
